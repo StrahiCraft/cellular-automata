@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scripts/MainScript.gd" type="Script" id=1]
+[ext_resource path="res://Theme.tres" type="Theme" id=2]
 
 [node name="MainScene" type="Node2D"]
 script = ExtResource( 1 )
@@ -8,3 +9,75 @@ gridColor = Color( 1, 1, 1, 1 )
 cellColor = Color( 1, 1, 1, 0.611765 )
 
 [node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="UI" type="Control" parent="."]
+
+[node name="StartEndSimulation" type="Button" parent="UI"]
+margin_left = 29.0
+margin_top = 17.0
+margin_right = 211.0
+margin_bottom = 105.0
+theme = ExtResource( 2 )
+toggle_mode = true
+action_mode = 0
+text = "Start"
+
+[node name="CellSize" type="HSlider" parent="UI"]
+margin_left = 29.0
+margin_top = 162.0
+margin_right = 211.0
+margin_bottom = 178.0
+theme = ExtResource( 2 )
+min_value = 25.0
+value = 50.0
+
+[node name="CellSizeText" type="Label" parent="UI/CellSize"]
+margin_top = -49.0
+margin_right = 182.0
+margin_bottom = -3.0
+theme = ExtResource( 2 )
+text = "Cell size: 50"
+valign = 1
+
+[node name="ColumnCount" type="HSlider" parent="UI"]
+margin_left = 29.0
+margin_top = 244.0
+margin_right = 211.0
+margin_bottom = 260.0
+theme = ExtResource( 2 )
+min_value = 1.0
+max_value = 25.0
+value = 6.0
+
+[node name="ColumnCountText" type="Label" parent="UI/ColumnCount"]
+margin_top = -49.0
+margin_right = 182.0
+margin_bottom = -3.0
+theme = ExtResource( 2 )
+text = "Columns: 6"
+valign = 1
+
+[node name="RowCount" type="HSlider" parent="UI"]
+margin_left = 29.0
+margin_top = 329.0
+margin_right = 211.0
+margin_bottom = 345.0
+theme = ExtResource( 2 )
+min_value = 1.0
+max_value = 25.0
+value = 6.0
+
+[node name="RowCountText" type="Label" parent="UI/RowCount"]
+margin_top = -49.0
+margin_right = 182.0
+margin_bottom = -3.0
+theme = ExtResource( 2 )
+text = "Rows: 6"
+valign = 1
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="toggled" from="UI/StartEndSimulation" to="." method="_on_StartEndSimulation_toggled"]
+[connection signal="value_changed" from="UI/CellSize" to="." method="_on_CellSize_value_changed"]
+[connection signal="value_changed" from="UI/ColumnCount" to="." method="_on_ColumnCount_value_changed"]
+[connection signal="value_changed" from="UI/RowCount" to="." method="_on_RowCount_value_changed"]
